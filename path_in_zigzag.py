@@ -1,3 +1,7 @@
+# Input: Nhap mot so nguyen label
+# Output: In ra danh sach cac node tren duong di tu label ve goc cay
+
+
 # Định nghĩa lại lớp Solution
 class Solution(object):
     def pathInZigZagTree(self, label):
