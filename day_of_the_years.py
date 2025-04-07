@@ -1,3 +1,7 @@
+# Input: Nhap mot chuoi date theo dinh dang YYYY-MM-DD
+# Output: In ra so ngay trong nam do tuong ung voi ngay do
+
+
 class Solution(object):
     def dayOfYear(self, date):
         """
