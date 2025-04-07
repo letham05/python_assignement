@@ -1,3 +1,7 @@
+# Input: Nhap mot so nguyen
+# Output: In ra True neu so do la so doi xung, nguoc lai in ra False
+
+
 class Solution(object):
     def isPalindrome(self, x):
         if x < 0 or (x % 10 == 0 and x != 0):
