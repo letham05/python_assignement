@@ -1,3 +1,7 @@
+# Input: Nhap danh sach cac so nguyen
+# Output: In ra danh sach cac so "lonely" trong danh sach (lonely tuc la khong co so nao ben trai hoac ben phai)
+
+
 class Solution(object):
     def findLonely(self, nums):
         """
