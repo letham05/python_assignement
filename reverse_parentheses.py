@@ -1,3 +1,7 @@
+# Input: Nhap chuoi s chua cac ky tu va cac cap ngoac
+# Output: In ra chuoi s da duoc dao nguoc cac ky tu trong cac cap ngoac va xoa cac cap ngoac
+
+
 class Solution(object):
     def reverseParentheses(self, s):
         """
