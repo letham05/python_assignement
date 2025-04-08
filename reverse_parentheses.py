@@ -27,3 +27,4 @@ class Solution(object):
 
 sol = Solution()
 print(sol.reverseParentheses("(u(love)i)"))  # Output: iloveu
+print(sol.reverseParentheses("(abcd)"))
