@@ -2,8 +2,8 @@
 # Output: In ra danh sach cac node tren duong di tu label ve goc cay
 
 
-# Định nghĩa lại lớp Solution
-class Solution(object):
+# version 1: Original (Less Optimized)
+class SolutionOriginal:
     def pathInZigZagTree(self, label):
         result = []
         level = 0
@@ -21,28 +21,59 @@ class Solution(object):
             label = start + end - label
             label //= 2
 
+        return result[::-1]  # Đảo ngược kết quả để trả về từ gốc đến label
+
+
+# version 2: Optimized with Precomputed Levels
+class SolutionOptimized:
+    def pathInZigZagTree(self, label):
+        result = []
+        level = 0
+        # Precompute the levels
+        while (1 << level) <= label:
+            level += 1
+
+        while label >= 1:
+            result.append(label)
+            level -= 1
+            # Precompute the start and end of the current level
+            start = 1 << level
+            end = (1 << (level + 1)) - 1
+            # Calculate the parent in the reversed tree
+            label = start + end - label
+            label //= 2
+
         return result[::-1]
+
+
+# version 3: Most Optimized (Using Bitwise Operations)
+class SolutionMostOptimized:
+    def pathInZigZagTree(self, label):
+        result = []
+        level = label.bit_length() - 1  # Tính level trực tiếp bằng bit_length()
+
+        while label >= 1:
+            result.append(label)
+            # Tính toán parent trong cây reversed
+            label = ((1 << level) + (1 << (level + 1)) - 1 - label) // 2
+            level -= 1
+
+        return result[::-1]  # Đảo ngược kết quả để trả về từ gốc đến label
 
 
 # Hàm test
 def test_solution():
-    solution = Solution()
+    original = SolutionOriginal()
+    optimized = SolutionOptimized()
+    most_optimized = SolutionMostOptimized()
 
-    # Test case 1
-    label = 14
-    print(f"Path for label {label}: {solution.pathInZigZagTree(label)}")
-
-    # Test case 2
-    label = 26
-    print(f"Path for label {label}: {solution.pathInZigZagTree(label)}")
-
-    # Test case 3
-    label = 1
-    print(f"Path for label {label}: {solution.pathInZigZagTree(label)}")
-
-    # Test case 4
-    label = 7
-    print(f"Path for label {label}: {solution.pathInZigZagTree(label)}")
+    test_cases = [14, 26, 1, 7]
+    for label in test_cases:
+        print(f"Label: {label}")
+        print(f"version 1: {original.pathInZigZagTree(label)}")
+        print(f"version 2: {optimized.pathInZigZagTree(label)}")
+        print(f"version 3 {most_optimized.pathInZigZagTree(label)}")
+        print()
 
 
 # Gọi hàm test
