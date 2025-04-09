@@ -1,4 +1,4 @@
-# Version 1: Trung bình - Xử lý thủ công số ngày từng tháng + năm nhuận
+# Version 1: Trung bình - Xử lý thủ công số ngày từng tháng + năm nhuận o(n)
 class SolutionV1:
     def dayOfYear(self, date):
         year, month, day = map(int, date.split("-"))
@@ -8,20 +8,25 @@ class SolutionV1:
         if (year % 400 == 0) or (year % 4 == 0 and year % 100 != 0):
             days_in_month[1] = 29
 
-        return sum(days_in_month[:month - 1]) + day
+        return sum(days_in_month[: month - 1]) + day
 
 
-# Version 2: Tốt hơn - Dùng datetime để lấy ngày thứ bao nhiêu trong năm
+# Version 2: Dùng datetime để lấy ngày thứ bao nhiêu trong năm o(1)
 from datetime import datetime
+
 
 class SolutionV2:
     def dayOfYear(self, date):
         dt = datetime.strptime(date, "%Y-%m-%d")
+        # t = dt.timetuple()
+        # print (t)
         return dt.timetuple().tm_yday
 
 
-# Version 3: Rất tốt - Dùng thư viện calendar để lấy số ngày trong mỗi tháng
+# Version 3: Dùng thư viện calendar để lấy số ngày trong mỗi tháng (loop o(n))
+
 import calendar
+
 
 class SolutionV3:
     def dayOfYear(self, date):
@@ -30,13 +35,12 @@ class SolutionV3:
         return total_days + day
 
 
-# Version 4: Tối ưu nhất - Không dùng thư viện, không vòng lặp
+# Version 4: Không dùng thư viện, không vòng lặp o(1)
 class SolutionV4:
     def dayOfYear(self, date):
         year, month, day = map(int, date.split("-"))
-        # Danh sách tổng số ngày tính đến đầu tháng (năm thường)
-        days_to_month = [0, 31, 59, 90, 120, 151, 181,
-                         212, 243, 273, 304, 334]
+        # Danh sách tổng số ngày tính đến đầu tháng (năm khong nhuan)
+        days_to_month = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334]
         is_leap = (year % 400 == 0) or (year % 4 == 0 and year % 100 != 0)
         return days_to_month[month - 1] + day + (1 if is_leap and month > 2 else 0)
 
@@ -52,7 +56,8 @@ def test_all_versions():
         print("V2:", SolutionV2().dayOfYear(date))
         print("V3:", SolutionV3().dayOfYear(date))
         print("V4:", SolutionV4().dayOfYear(date))
-        print("-" * 30)
+
+        # print("-" * 30)
 
 
 # Chạy test
