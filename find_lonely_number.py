@@ -2,15 +2,14 @@
 # Output: In ra danh sach cac so "lonely" trong danh sach (lonely tuc la khong co so nao ben trai hoac ben phai)
 
 
-# Version 1: Original (Using Dictionary for Frequency Count)
-# This version uses a dictionary to count the frequency of each number and checks
-# if a number is "lonely" by verifying its neighbors. It is straightforward but not the most efficient.
+# Version 1: Using Dictionary for Frequency Count o(n)
 class SolutionOriginal:
     def findLonely(self, nums):
         """
         :type nums: List[int]
         :rtype: List[int]
         """
+        # dictionary to count the frequency of each number
         freq = {}  # Count the frequency of each number
 
         for num in nums:
@@ -27,11 +26,8 @@ class SolutionOriginal:
         return result
 
 
-# Version 2: Optimized (Using Collections.Counter)
-# This version uses `collections.Counter` to simplify the frequency counting process.
-# It improves code readability and reduces manual dictionary operations.
+# Version 2: (Using Collections.Counter) o(n)
 from collections import Counter
-
 
 class SolutionOptimized:
     def findLonely(self, nums):
@@ -47,9 +43,7 @@ class SolutionOptimized:
         ]
 
 
-# Version 3: Most Optimized (Single Pass with Set)
-# This version uses a set for constant-time lookups and avoids counting frequencies for all numbers.
-# It minimizes redundant checks and is the most efficient approach.
+# Version 3:(Single Pass with Set) o(n)
 class SolutionMostOptimized:
     def findLonely(self, nums):
         """
@@ -65,14 +59,18 @@ class SolutionMostOptimized:
             and (num - 1 not in nums_set)
             and (num + 1 not in nums_set)
         ]
+        
+#using sorted o(nlogn)    
 class SolutionSorted:
     def findLonely(self, nums):
         nums.sort()
         result = []
 
         for i in range(len(nums)):
+            
             if (i > 0 and nums[i] == nums[i - 1]) or (i < len(nums) - 1 and nums[i] == nums[i + 1]):
                 continue
+            # 
             if (i > 0 and nums[i] - 1 == nums[i - 1]) or (i < len(nums) - 1 and nums[i] + 1 == nums[i + 1]):
                 continue
             result.append(nums[i])
@@ -85,15 +83,15 @@ def test_solution():
     original = SolutionOriginal()
     optimized1 = SolutionOptimized()
     optimized2 = SolutionMostOptimized()
-    optimized3 = SolutionSorted()
+    Sorted3 = SolutionSorted()
 
     test_cases = [[10, 6, 5, 8], [1, 3, 5, 3], [4, 4, 4, 4], [7, 8, 9, 10]]
     for nums in test_cases:
         print(f"Input: {nums}")
-        print(f"Version 1 (Original): {original.findLonely(nums)}")
+        print(f"Version 1 : {original.findLonely(nums)}")
         print(f"Version 2 (Optimized1): {optimized1.findLonely(nums)}")
         print(f"Version 3 (Optimized2): {optimized2.findLonely(nums)}")
-        print(f"Version 4 (Sorted3): {optimized3.findLonely(nums)}")
+        print(f"Version 4 (Sorted3): {Sorted3.findLonely(nums)}")
         print()
 
 
