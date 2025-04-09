@@ -2,56 +2,32 @@
 # Output: In ra chuoi s da duoc dao nguoc cac ky tu trong cac cap ngoac va xoa cac cap ngoac
 
 
-# Version 1: Original (Stack-Based Approach)
-class SolutionOriginal:
-    def reverseParentheses(self, s):
-        """
-        :type s: str
-        :rtype: str
-        """
-        stack = []
-        curr = ""
+# Version 1: (Stack-Based Approach) - worst case O(n^2)
+# class SolutionOriginal:
+#     def reverseParentheses(self, s):
+#         """
+#         :type s: str
+#         :rtype: str
+#         """
+#         stack = []
+#         curr = ""
 
-        for ch in s:
-            if ch == "(":
-                stack.append(curr)
-                curr = ""
-            elif ch == ")":
-                curr = curr[::-1]
-                prev = stack.pop()
-                curr = prev + curr
-            else:
-                curr += ch
+#         for ch in s:
+#             if ch == "(":
+#                 stack.append(curr)
+#                 curr = ""
+#             elif ch == ")":
+#                 curr = curr[::-1]
+#                 prev = stack.pop()
+#                 curr = prev + curr
+#             else:
+#                 curr += ch
 
-        return curr
+#         return curr
 
 
-# Version 2: Optimized (Using List for String Concatenation)
+# Version 2: Most Optimized (Two-Pass Approach) optimized to O(n)
 class SolutionOptimized:
-    def reverseParentheses(self, s):
-        """
-        :type s: str
-        :rtype: str
-        """
-        stack = []
-        curr = []
-
-        for ch in s:
-            if ch == "(":
-                stack.append(curr)
-                curr = []
-            elif ch == ")":
-                curr.reverse()
-                prev = stack.pop()
-                curr = prev + curr
-            else:
-                curr.append(ch)
-
-        return "".join(curr)
-
-
-# Version 3: Most Optimized (Two-Pass Approach)
-class SolutionMostOptimized:
     def reverseParentheses(self, s):
         """
         :type s: str
@@ -86,18 +62,14 @@ class SolutionMostOptimized:
 
 # Test function to compare all versions
 def test_solution():
-    original = SolutionOriginal()
+    # original = SolutionOriginal()
     optimized = SolutionOptimized()
-    most_optimized = SolutionMostOptimized()
 
     test_cases = ["(u(love)i)", "(abcd)", "(a(bc)d)", "((ab)c)"]
     for s in test_cases:
         print(f"Input: {s}")
-        print(f"Version 1 : {original.reverseParentheses(s)}")
-        print(f"Version 2 : {optimized.reverseParentheses(s)}")
-        print(
-            f"Version 3 (Most): {most_optimized.reverseParentheses(s)}"
-        )  # Fixed label
+        # print(f"Version 1 : {original.reverseParentheses(s)}")
+        print(f"Version 2: {optimized.reverseParentheses(s)}")  # Fixed label
         print()
 
 
